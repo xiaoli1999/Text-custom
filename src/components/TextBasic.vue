@@ -1,8 +1,8 @@
 <template>
-    <Card class="basic-card">
+    <Card class="basic-card" :class="isShow ? '' : 'hidden'">
         <p slot="title">字体基础参数</p>
-        <p slot="extra"><Icon class="card-copy" type="ios-copy-outline" size="20" color="#2d8cf0" @click="copyBasicText" /></p>
-        <Form :model="Basic" label-position="left" :label-width="60">
+        <p slot="extra"><Icon class="card-copy" :type="isShow ? 'md-arrow-dropdown' : 'md-arrow-dropup'" size="20" color="#2d8cf0" @click="copyBasicText" /></p>
+        <Form :model="Basic" label-position="left" :label-width="60" :style="{height: height}">
             <FormItem label="颜色">
                 <ColorPicker v-model="Basic.color" alpha :disabled="disableArr.includes('color')" />
             </FormItem>
@@ -47,7 +47,8 @@ export default {
     data () {
         return {
             fontFamilyList: ['楷体', '新宋体', '黑体', 'Arial', 'Corbel', 'Bahnschrift', 'Consolas'],
-            fontWeightList: ['500', '600', '700', '800', '900']
+            fontWeightList: ['500', '600', '700', '800', '900'],
+            isShow: true
         }
     },
     computed: {
@@ -58,7 +59,8 @@ export default {
             this.$store.commit('setState', ['Text', e.target.value])
         },
         copyBasicText () {
-            this.$copyText(JSON.stringify(this.Basic)).then(() => this.$Message.success('复制成功')).catch(e => this.$Message.error(e.message || e))
+            this.isShow = !this.isShow
+            // this.$copyText(JSON.stringify(this.Basic)).then(() => this.$Message.success('复制成功')).catch(e => this.$Message.error(e.message || e))
         }
     }
 }
@@ -67,5 +69,26 @@ export default {
 <style lang="less" scoped>
 .basic-card {
     margin: 0 8px;
+    transition: all .2s;
+
+    /deep/ .ivu-card-extra {
+        display: none;
+    }
+}
+
+.hidden {
+    /deep/ .ivu-card-body {
+        padding: 0!important;
+        height: 0;
+        overflow: hidden;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .basic-card {
+        /deep/ .ivu-card-extra {
+            display: block;
+        }
+    }
 }
 </style>
