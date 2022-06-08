@@ -1,6 +1,6 @@
 <template>
     <div class="text">
-        <header>文字线性渐变</header>
+        <header>文字条纹效果</header>
         <Row class="main">
             <Col :xs="24" :sm="16" :md="18">
                 <div class="main-content">
@@ -12,23 +12,25 @@
             </Col>
         </Row>
         <Card class="parameter">
-            <p slot="title">文字渐变参数</p>
+            <p slot="title">文字条纹参数</p>
             <p slot="extra"><Icon class="card-copy" type="ios-copy-outline" size="20" color="#2d8cf0" @click="copyStyle" /></p>
             <Form label-position="left" :label-width="80">
-                <FormItem label="旋转角度">
+                <FormItem label="条纹旋转角度">
                     <Slider v-model="range" :min="0" :max="360" show-input></Slider>
                 </FormItem>
-                <FormItem v-for="(item, index) in gradientList" :key="index" :label="'渐变色' + (index + 1)">
+                <FormItem v-for="(item, index) in gradientList" :key="index" :label="'条纹' + (index + 1)">
                     <Tag color="green">颜色</Tag>
                     <ColorPicker class="ml-4 mr-8" v-model="item[0]" size="small" alpha />
-                    <Tag color="purple">百分比</Tag>
-                    <InputNumber class="ml-4 mr-8" v-model="item[1]" size="small" :step="1" :min="0" :max="100"></InputNumber>
+                    <Tag color="purple">渐变大小</Tag>
+                    <InputNumber class="ml-4 mr-8" v-model="item[1]" size="small" :step="1" :min="0"></InputNumber>
                 </FormItem>
             </Form>
             <div class="notes">
                 <Divider orientation="left">注解</Divider>
-                <p>1.渐变颜色组最小为两组，渐变进度为0% ~ 100%；可设置更多组，格式同上。 </p>
-                <p>2.渐变文字颜色受渐变背景色影响，与字体本身颜色无关 </p>
+                <p>1.条纹文字两种方式，一种是条纹背景+文字（也就是说文字背景），一种是利用渐变色制作条纹背景，再实现条纹文字；此案例为第二种。 </p>
+                <p>2.建议使用背景图实现条纹文字 </p>
+                <p>3.默认渐变尺寸为0，即每个渐变尺寸差值应该相等（4-0 = 8-4），差值不等时条纹不相等 </p>
+                <p>4.默认两色条纹，有多色条纹需求私聊 </p>
             </div>
             <div class="code">
                 <Divider orientation="left">样式代码</Divider>
@@ -47,21 +49,22 @@ export default {
     mixins: [parameter],
     data () {
         return {
-            range: 45,
+            range: -45,
             gradientList: [
-                ['#b8cbb8', 0],
-                ['#b465da', 25],
-                ['#cf6cc9', 55],
-                ['#ee609c', 75],
-                ['#ee609c', 100]
-            ]
+                ['#000', 4],
+                ['#fff', 8]
+            ],
+            bgSize: {
+                x: 20,
+                y: 20
+            }
         }
     },
     computed: {
         styles () {
             const obj = { ...this.commonStyles }
-            const color = this.gradientList.map(i => `${i[0]} ${i[1]}%`).join(', ')
-            obj.backgroundImage = `linear-gradient(${this.range}deg, ${color}) !important`
+            delete obj.background
+            obj.backgroundImage = `repeating-linear-gradient(${this.range}deg, ${this.gradientList[0][0]} 0, ${this.gradientList[0][0]} ${this.gradientList[0][1]}px, ${this.gradientList[1][0]}, ${this.gradientList[1][0]} ${this.gradientList[1][1]}px)`
             return obj
         }
     }

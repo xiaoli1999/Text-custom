@@ -19,14 +19,14 @@ export default {
             list: [
                 ['文字线性渐变', '/css/gradient'],
                 ['文字图片背景', '/css/background'],
-                ['文字阴影效果', '/css/shade'],
-                ['文字3D立体效果', '/css/3d'],
+                ['文字阴影效果', '/css/shadow'],
+                ['文字3D立体效果', '/css/threeD'],
                 ['文字描边效果', '/css/stroke'],
                 ['文字倾斜效果', '/css/skew'],
                 ['火焰文字效果', '/css/fire'],
                 ['文字条纹效果', '/css/stripe'],
                 ['文字内嵌效果', '/css/embed'],
-                ['文字背景反色效果', '/gradient']
+                ['文字背景反色效果', '/css/back']
             ],
             loding: false
         }
@@ -38,10 +38,6 @@ export default {
 
 <style lang="less" scoped>
 @import "../less/scrollbar.less";
-
-.min-h {
-    min-height: 190px;
-}
 
 .home {
     width: 100%;
@@ -104,9 +100,11 @@ export default {
         .text {
             width: 48%;
             padding: 4% 2%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 24px;
             color: #f4f4f4;
-            text-align: center;
             background: #f4f4f410;
             backdrop-filter: blur(1px);
             margin-bottom: 24px;
@@ -124,5 +122,67 @@ export default {
         }
     }
 
+}
+
+@media only screen and (max-width: 576px) {
+    .home {
+
+        header {
+            font-size: 36px;
+            letter-spacing: 2px;
+            padding: 8px;
+
+            .wave {
+                /*设置元素背景图像*/
+                background: url("../assets/img/wave2.gif") repeat-x;
+                background-size: 200px 180px;
+                background-position: 0 -50px;
+                -webkit-background-clip: text; /*背景被裁剪到文字*/
+                -webkit-text-fill-color: transparent; /*设置文字的填充颜色*/
+                -webkit-text-stroke: 1px #ffffff40;        /*文字描边*/
+                //-webkit-animation: loading-animation 4200ms infinite linear alternate, wave-animation 4800ms infinite alternate; /*设置动画*/
+            }
+        }
+
+        @-webkit-keyframes wave-animation {/*创建动画*/
+            0% {
+                background-position: 0 -50px;
+            }
+            60% {
+                background-position: 30% -80px;
+            }
+            100% {
+                background-position: 40% -100px;
+            }
+        }
+        @-webkit-keyframes loading-animation {/*创建动画*/
+            0% {
+                background-position: 40% -100px;
+            }
+            100% {
+                background-position: 0 -50px;
+            }
+        }
+
+        main {
+            max-width: 1200px;
+            padding: 8px;
+            height: calc(100vh - 86px);
+            margin: 8px auto;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            .text {
+                width: 100%;
+                padding: 6% 0;
+                font-size: 20px;
+                color: #f4f4f4;
+                background: #f4f4f422;
+                margin-bottom: 16px;
+            }
+        }
+    }
 }
 </style>

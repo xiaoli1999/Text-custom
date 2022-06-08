@@ -1,0 +1,132 @@
+.text {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-bottom: 8px;
+    color: #6adefb;
+
+    header {
+        height: 80px;
+        line-height: 80px;
+        text-align: center;
+        font-size: 30px;
+        font-family: 楷体;
+        letter-spacing: 1px;
+        -webkit-background-clip: text; /* 背景被裁剪到文字 */
+        -webkit-text-fill-color: transparent; /* 设置文字的填充颜色 */
+        -webkit-text-stroke: 1px #fff;        /*文字描边*/
+    }
+
+    .main {
+        max-width: 1080px;
+
+        .main-content {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            justify-content: center;
+            width: calc(100% - 8px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            margin-left: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            word-break: break-all;
+            background: #fff;
+
+            .main-content-panel {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .main-card {
+            margin: 0 8px;
+        }
+    }
+
+    .parameter {
+        margin: 8px;
+
+        .card-copy {
+            position: relative;
+            top: -4px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .notes {
+            color: #515a6e;
+        }
+
+        .code {
+            font-size: 14px;
+
+            color: #515a6e;
+            word-break: break-all;
+
+            >p {
+                padding: 8px;
+                background: #eee;
+                border-radius: 2px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .text {
+
+        header {
+            height: 60px;
+            line-height: 60px;
+            font-size: 24px;
+        }
+
+        .main {
+            max-width: 1080px;
+
+            .main-content {
+                width: calc(100% - 16px);
+                padding: 4px;
+                height: auto;
+                border: 1px solid #ccc;
+                margin: 8px;
+            }
+
+            .main-card {
+                margin: 0 8px;
+            }
+        }
+
+        .parameter {
+            margin: 8px;
+
+            .card-copy {
+                position: relative;
+                top: -4px;
+                font-size: 20px;
+                cursor: pointer;
+            }
+
+            .notes {
+                color: #515a6e;
+            }
+
+            .code {
+                font-size: 14px;
+
+                color: #515a6e;
+                word-break: break-all;
+
+                >p {
+                    padding: 8px;
+                    background: #eee;
+                    border-radius: 2px;
+                }
+            }
+        }
+    }
+}

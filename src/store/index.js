@@ -12,11 +12,11 @@ const store = new Vuex.Store({
          * @param {Object} basic 字体基本配置
          * */
         Basic: {
-            color: 'transparent',
-            background: 'transparent',
-            fontSize: 40,
+            color: '#000',
+            background: '#fff',
+            fontSize: 48,
             letterSpacing: 0,
-            fontWeight: '700',
+            fontWeight: '900',
             fontFamily: '楷体'
         }
     },

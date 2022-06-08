@@ -1,18 +1,18 @@
 <template>
     <div class="text">
-        <header>文字线性渐变</header>
+        <header>文字背景反色效果</header>
         <Row class="main">
             <Col :xs="24" :sm="16" :md="18">
                 <div class="main-content">
-                    <div class="main-content-panel" :style="styles">{{ Text }}</div>
+                    <div class="main-content-panel" :style="styles"></div>
                 </div>
             </Col>
             <Col :xs="24" :sm="8" :md="6">
-                <TextBasic :disableArr="['bg', 'color']" />
+                <TextBasic :disableArr="['bg', 'text']" />
             </Col>
         </Row>
         <Card class="parameter">
-            <p slot="title">文字渐变参数</p>
+            <p slot="title">文字背景反色参数</p>
             <p slot="extra"><Icon class="card-copy" type="ios-copy-outline" size="20" color="#2d8cf0" @click="copyStyle" /></p>
             <Form label-position="left" :label-width="80">
                 <FormItem label="旋转角度">
@@ -27,8 +27,9 @@
             </Form>
             <div class="notes">
                 <Divider orientation="left">注解</Divider>
-                <p>1.渐变颜色组最小为两组，渐变进度为0% ~ 100%；可设置更多组，格式同上。 </p>
-                <p>2.渐变文字颜色受渐变背景色影响，与字体本身颜色无关 </p>
+                <p>1.渐变颜色组最小为两组，渐变进度为0% ~ 100%；目前只支持2色，显示效果为拼色（前两组、后两组 渐变颜色需保持一致） </p>
+                <p>2.改示例颜色为混合模式（颜色叠加），默认黑白效果最佳 </p>
+                <p>3.渐变文字颜色受渐变背景色影响，与字体本身颜色无关 </p>
             </div>
             <div class="code">
                 <Divider orientation="left">样式代码</Divider>
@@ -49,11 +50,10 @@ export default {
         return {
             range: 45,
             gradientList: [
-                ['#b8cbb8', 0],
-                ['#b465da', 25],
-                ['#cf6cc9', 55],
-                ['#ee609c', 75],
-                ['#ee609c', 100]
+                ['#fff', 0],
+                ['#fff', 50],
+                ['#000', 50],
+                ['#100', 100]
             ]
         }
     },
@@ -64,7 +64,10 @@ export default {
             obj.backgroundImage = `linear-gradient(${this.range}deg, ${color}) !important`
             return obj
         }
-    }
+    },
+    created () {
+        this.$store.commit('setState', ['Basic', { ...this.Basic, color: '#fff' }])
+    },
 }
 </script>
 
@@ -74,8 +77,12 @@ export default {
     .main {
         .main-content {
             .main-content-panel {
-                -webkit-background-clip: text !important; /* 背景被裁剪到文字 */
-                -webkit-text-fill-color: transparent; /* 设置文字的填充颜色 */
+                mix-blend-mode: difference;
+
+                &::after {
+                    content: 'Want to try? Hurry up!';
+                    mix-blend-mode: difference;
+                }
             }
         }
 
