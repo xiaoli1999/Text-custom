@@ -2,7 +2,11 @@
   "name": "text-custom",
   "version": "0.1.0",
   "description": "css文字定制",
-  "author": "小黎<https://xiaoli.vip>",
+  "author": {
+    "name": "xiaoli",
+    "email": "22708206@qq.com",
+    "url": "https://xiaoli.vip/"
+  },
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -11,7 +15,6 @@
   },
   "dependencies": {
     "axios": "^0.21.4",
-    "html2canvas": "^1.4.1",
     "lodash": "^4.17.21",
     "view-design": "^4.7.0",
     "vue": "^2.6.14",

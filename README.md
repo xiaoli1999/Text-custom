@@ -1,13 +1,20 @@
-## css文字定制效果 (Text custom)
+## css文字定制效果
 
 #### 简介
+```javascript
+css自定义文字效果,兼容多端
+```
 
-##### 该项目为css文字定制效果
+#### 案例
+```javascript
+背景色文字 | 文字描边 | 火焰文字 | 镂空文字等
+```
 
-#### 架构
+#### [预览地址](https://xiaoli.vip/text-custom)
 
-##### **Vue2**前端项目，UI组件库使用 **IViewUI**。
+#### 效果图
+![](.README_images/df2a8a14.png)
+![](.README_images/24696360.png)
+![](.README_images/8452b211.png)
+![](.README_images/f3400fa4.png)
 
-#### 要求
-
-##### Vue = 2.6.12
